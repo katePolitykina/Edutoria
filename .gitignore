@@ -1,0 +1,36 @@
+# Xcode
+xcuserdata/
+*.xcuserstate
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+DerivedData/
+build/
+*.hmap
+.idea/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+.build/
+
+# Firebase
+Firebase/Firestore/
+Firebase/Auth/
+Firebase/Messaging/
+
+# macOS
+.DS_Store
+Thumbs.db
+
+# App-specific
+*.swp
+*.swo
+*.lock
+
