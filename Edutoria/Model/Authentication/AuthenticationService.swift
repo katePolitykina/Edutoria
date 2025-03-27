@@ -1,6 +1,7 @@
 // AuthenticationService.swift
 
 import FirebaseAuth
+import FirebaseFirestore
 
 class AuthenticationService {
     
@@ -28,6 +29,10 @@ class AuthenticationService {
                 return
             }
             if let user = authResult?.user {
+                
+                let userId = user.uid
+                let data: [String: Any ] = ["email": email]
+                Firestore.firestore().collection("users").document(userId).setData(data)
                 completion(.success(user))
             }
         }

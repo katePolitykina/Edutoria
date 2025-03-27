@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class RegViewController: UIViewController {
 
     @IBOutlet weak var regStackView: UIStackView!
@@ -29,7 +28,14 @@ class RegViewController: UIViewController {
         print("RegistrateViewController удален из памяти")
     }
 
-    
+    func switchToMainScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+            sceneDelegate?.window?.rootViewController = mainVC
+        }
+        
+    }
     
     
     @IBAction func registerBtnClick(_ sender: UIButton) {
@@ -46,9 +52,9 @@ class RegViewController: UIViewController {
         AuthenticationService.shared.registerUser(email: email, password: password) { result in
             switch result {
                 case .success(let user):
-                self.removeErrorLabel()
+                    self.switchToMainScreen()
                 case .failure(let error):
-                self.showErrorLabel(text: error.localizedDescription)
+                    self.showErrorLabel(text: error.localizedDescription)
                 }
         }
     }
@@ -88,10 +94,10 @@ class RegViewController: UIViewController {
     
     
     @IBAction func LoginBtnClick(_ sender: UIButton) {
-        self.switchToMainScreen()
+        self.switchToLoginScreen()
             
     }
-    func switchToMainScreen() {
+    func switchToLoginScreen() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let mainVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
