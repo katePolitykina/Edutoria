@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C105A9292D8B259300BC0608 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C105A9282D8B259300BC0608 /* FirebaseAuth */; };
 		C105A92B2D8B259300BC0608 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = C105A92A2D8B259300BC0608 /* FirebaseCore */; };
+		C157A38B2D920ADE005327DD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C157A38A2D920ADE005327DD /* FirebaseFirestore */; };
+		C1ECFB092D956F7F0099567E /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = C1ECFB082D956F7F0099567E /* SDWebImageSVGCoder */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 			files = (
 				C105A92B2D8B259300BC0608 /* FirebaseCore in Frameworks */,
 				C105A9292D8B259300BC0608 /* FirebaseAuth in Frameworks */,
+				C157A38B2D920ADE005327DD /* FirebaseFirestore in Frameworks */,
+				C1ECFB092D956F7F0099567E /* SDWebImageSVGCoder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				C105A8F32D8B169100BC0608 /* Edutoria */,
+				C157A3892D920ADE005327DD /* Frameworks */,
 				C105A8F22D8B169100BC0608 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,6 +103,13 @@
 				C105A9112D8B169300BC0608 /* EdutoriaUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C157A3892D920ADE005327DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +134,8 @@
 			packageProductDependencies = (
 				C105A9282D8B259300BC0608 /* FirebaseAuth */,
 				C105A92A2D8B259300BC0608 /* FirebaseCore */,
+				C157A38A2D920ADE005327DD /* FirebaseFirestore */,
+				C1ECFB082D956F7F0099567E /* SDWebImageSVGCoder */,
 			);
 			productName = Edutoria;
 			productReference = C105A8F12D8B169100BC0608 /* Edutoria.app */;
@@ -201,6 +215,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				C105A9272D8B259300BC0608 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C1ECFB072D956F7F0099567E /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C105A8F22D8B169100BC0608 /* Products */;
@@ -579,6 +594,14 @@
 				minimumVersion = 11.10.0;
 			};
 		};
+		C1ECFB072D956F7F0099567E /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSVGCoder.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -591,6 +614,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C105A9272D8B259300BC0608 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCore;
+		};
+		C157A38A2D920ADE005327DD /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C105A9272D8B259300BC0608 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		C1ECFB082D956F7F0099567E /* SDWebImageSVGCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1ECFB072D956F7F0099567E /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */;
+			productName = SDWebImageSVGCoder;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
