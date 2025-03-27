@@ -41,12 +41,20 @@ class LoginViewController: UIViewController {
         }
         
     }
-    
+    func switchToMainScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+            sceneDelegate?.window?.rootViewController = mainVC
+        }
+        
+    }
     @IBAction func entryBtnClick(_ sender: UIButton) {
         AuthenticationService.shared.loginUser(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { result in
             switch result {
             case .success(let user):
                 self.removeErrorLabel()
+                self.switchToMainScreen()
             case .failure(let error):
                 self.showErrorLabel(text: error.localizedDescription)
             }
