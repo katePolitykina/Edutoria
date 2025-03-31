@@ -26,7 +26,7 @@ class FavouritesViewController: UINavigationController {
                 // Обновляем rootViewController с новыми данными
                 if let rootVC = self.viewControllers.first as? CoursesListViewController {
                     rootVC.courses = courses
-                    rootVC.favouriteCourses = courses
+                    Favourite.shared.courses = courses
                     rootVC.tableView.reloadData()  // Перезагружаем таблицу с новыми данными
                 }
             } else {

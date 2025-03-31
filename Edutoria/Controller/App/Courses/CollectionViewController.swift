@@ -68,17 +68,14 @@ extension CollectionViewController: UICollectionViewDelegate {
                 return
             }
             
-            // Запрашиваем избранные курсы
             FirestoreService.shared.getFavouriteCourses { [weak self] (favouriteCourses, error) in
                 guard let self = self else { return }
 
                 if let favouriteCourses = favouriteCourses {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    
                     // Создаем и настраиваем новый контроллер
                     if let coursesVC = storyboard.instantiateViewController(withIdentifier: "CoursesListViewController") as? CoursesListViewController {
                         coursesVC.courses = courses ?? [] // Передаем курсы категории
-                        coursesVC.favouriteCourses = favouriteCourses // Передаем избранные курсы
                         coursesVC.categoryName = selectedCategory.name
                         self.navigationController?.pushViewController(coursesVC, animated: true)
                     }

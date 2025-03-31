@@ -7,7 +7,6 @@ class CoursesListViewController: UIViewController {
     
     var categoryName: String?
     var courses: [Course] = []
-    var favouriteCourses: [Course] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,32 +14,14 @@ class CoursesListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CoursesListTableViewCell.nib(), forCellReuseIdentifier: CoursesListTableViewCell.identifier())
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    deinit {
-        print("CoursesListViewController удален из памяти")
+            
+        self.tableView.reloadData()
+        
     }
 
-    private func loadFavouriteCourses() {
-        // Загружаем избранные курсы из Firestore
-        FirestoreService.shared.getFavouriteCourses { [weak self] (courses, error) in
-            guard let self = self else { return }
-
-            if let courses = courses {
-                self.favouriteCourses = courses
-            } else {
-                // Обработка ошибки, например, отображение сообщения об ошибке
-                print("Error loading favourite courses: \(error?.localizedDescription ?? "Unknown error")")
-            }
-        }
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Загружаем избранные курсы и обновляем таблицу
-        loadFavouriteCourses()
+
         self.tableView.reloadData()
     }
     
@@ -60,19 +41,19 @@ extension CoursesListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoursesListTableViewCell.identifier(), for: indexPath) as! CoursesListTableViewCell
         let course = courses[indexPath.row]
         
-        cell.configure(with: course, isFavourite: isCourseFavorite(course: course, favoriteCourses: favouriteCourses))
+        cell.configure(with: course, isFavourite: isCourseFavorite(course: course, favoriteCourses: Favourite.shared.courses))
         
         cell.onFavouriteTapped = { [weak self] in
             guard let self = self else { return }
             
             if let index = self.courses.firstIndex(where: { $0.id == course.id }) {
-                let isCurrentlyFavourite = self.isCourseFavorite(course: course, favoriteCourses: self.favouriteCourses)
+                let isCurrentlyFavourite = self.isCourseFavorite(course: course, favoriteCourses: Favourite.shared.courses)
                 
                 if isCurrentlyFavourite {
                     // Удаление из избранного
                     FirestoreService.shared.removeCourseFromFavourite(course) { success in
                         if success {
-                            self.favouriteCourses.removeAll { $0.id == course.id }
+                            Favourite.shared.courses.removeAll { $0.id == course.id }
                             self.tableView.reloadRows(at: [indexPath], with: .automatic)
                         } else {
                             print("Не удалось удалить курс из избранного")
@@ -82,7 +63,7 @@ extension CoursesListViewController: UITableViewDataSource {
                     // Добавление в избранное
                     FirestoreService.shared.addCourseToFavourite(course) { success in
                         if success {
-                            self.favouriteCourses.append(course)
+                            Favourite.shared.courses.append(course)
                             self.tableView.reloadRows(at: [indexPath], with: .automatic)
                         } else {
                             print("Не удалось добавить курс в избранное")
