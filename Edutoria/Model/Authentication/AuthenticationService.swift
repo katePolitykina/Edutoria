@@ -78,4 +78,10 @@ class AuthenticationService {
     func isUserLoggedIn() -> Bool {
         return Auth.auth().currentUser != nil
     }
+    
+    // Получить UID текущего пользователя
+    func getCurrentUserID() -> String? {
+        return Auth.auth().currentUser?.uid
+    }
+
 }

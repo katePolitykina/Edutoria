@@ -1,3 +1,11 @@
+//
+//  UserProfile.swift
+//  Edutoria
+//
+//  Created by Ekaterina Politykina on 31.03.25.
+//
+
+
 import Foundation
 
 struct UserProfile {
@@ -42,7 +50,7 @@ struct UserProfile {
         ]
     }
     
-    static func empty(userId: String, email: String = "") -> UserProfile {
+    static func empty(userId: String = "", email: String = "") -> UserProfile {
         return UserProfile(id: userId, data: [
             "email": email,
             "firstName": "",

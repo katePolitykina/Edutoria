@@ -1,29 +1,38 @@
-//
-//  FavouritesViewController.swift
-//  Edutoria
-//
-//  Created by Ekaterina Politykina on 30.03.25.
-//
-
 import UIKit
 
 class FavouritesViewController: UINavigationController {
-
+    
+    var favouriteCourses: [Course] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
+    override func viewWillAppear(_ animated: Bool) {
+       
+        
+        loadFavouriteCourses()
+        super.viewWillAppear(animated)
+        
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
+    private func loadFavouriteCourses() {
+        // Загружаем избранные курсы из Firestore
+        FirestoreService.shared.getFavouriteCourses { [weak self] (courses, error) in
+            guard let self = self else { return }
 
+            if let courses = courses {
+                self.favouriteCourses = courses
+                // Обновляем rootViewController с новыми данными
+                if let rootVC = self.viewControllers.first as? CoursesListViewController {
+                    rootVC.courses = courses
+                    Favourite.shared.courses = courses
+                    rootVC.tableView.reloadData()  // Перезагружаем таблицу с новыми данными
+                }
+            } else {
+                // Обработка ошибки, например, отображение сообщения об ошибке
+                print("Error loading favourite courses: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
 }

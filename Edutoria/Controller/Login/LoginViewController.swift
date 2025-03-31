@@ -23,9 +23,6 @@ class LoginViewController: UIViewController {
         
         
     }
-    deinit {
-        print("LoginViewController удален из памяти")
-    }
 
 
     @IBAction func regBtnClick(_ sender: UIButton) {
