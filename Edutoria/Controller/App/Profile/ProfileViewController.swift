@@ -7,7 +7,8 @@
 
 import UIKit
 
-class LogoutViewController: UIViewController {
+class ProfileViewController: UIViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
