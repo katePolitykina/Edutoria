@@ -29,7 +29,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="f97-Gt-wCj">
-                                        <rect key="frame" x="30" y="283.66666666666663" width="315" height="270.66666666666663"/>
+                                        <rect key="frame" x="30" y="283.66666666666669" width="315" height="215.33333333333331"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вход" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OxM-Oh-83l">
                                                 <rect key="frame" x="133.33333333333334" y="0.0" width="48.666666666666657" height="25.333333333333332"/>
@@ -106,20 +106,10 @@
                                                     <action selector="entryBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2hB-59-cAQ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4R-mh-vy2">
-                                                <rect key="frame" x="0.0" y="236.33333333333331" width="315" height="34.333333333333314"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="34.333333333333314" id="0Rh-Vw-Ow3"/>
-                                                </constraints>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Забыли пароль?"/>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="6Yz-Dk-f5J" firstAttribute="leading" secondItem="f97-Gt-wCj" secondAttribute="leading" id="QpV-eo-sfl"/>
                                             <constraint firstItem="6Yz-Dk-f5J" firstAttribute="leading" secondItem="hpP-cA-Ujt" secondAttribute="leading" id="VK8-Jb-VyA"/>
-                                            <constraint firstItem="hpP-cA-Ujt" firstAttribute="leading" secondItem="q4R-mh-vy2" secondAttribute="leading" id="icX-YC-Evr"/>
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7s4-pC-frh">
@@ -162,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-414.50381679389312" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="-1858" y="708"/>
         </scene>
         <!--Reg View Controller-->
         <scene sceneID="7eL-7q-8kf">
@@ -338,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UQb-d0-Rct" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="416" y="-2"/>
+            <point key="canvasLocation" x="-1175" y="708"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="j8k-Yk-PeI">
@@ -353,7 +343,8 @@
                     <connections>
                         <segue destination="tWp-Gz-K4H" kind="relationship" relationship="viewControllers" id="Yu3-fN-Kgb"/>
                         <segue destination="mRk-Yi-0g8" kind="relationship" relationship="viewControllers" id="95n-lh-zCW"/>
-                        <segue destination="ADA-Xo-ecR" kind="relationship" relationship="viewControllers" id="Vfs-Ka-mJr"/>
+                        <segue destination="7iw-Jb-GRc" kind="relationship" relationship="viewControllers" id="Vfs-Ka-mJr"/>
+                        <segue destination="Cb1-5j-S9E" kind="relationship" relationship="viewControllers" id="vmA-O7-xQT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWt-Bj-fmq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -363,37 +354,23 @@
         <!--Профиль-->
         <scene sceneID="TjD-rL-k4f">
             <objects>
-                <viewController storyboardIdentifier="LogoutViewController" id="tWp-Gz-K4H" customClass="LogoutViewController" customModule="Edutoria" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="tWp-Gz-K4H" customClass="ProfileViewController" customModule="Edutoria" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="waQ-NB-4YM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAZ-Zg-syA">
-                                <rect key="frame" x="82" y="233" width="75" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="logOut:" destination="tWp-Gz-K4H" eventType="touchUpInside" id="rAc-xx-oXI"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="nem-Br-cQO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="OAZ-Zg-syA" firstAttribute="top" secondItem="nem-Br-cQO" secondAttribute="top" constant="183" id="QkW-KF-Utd"/>
-                            <constraint firstItem="OAZ-Zg-syA" firstAttribute="leading" secondItem="nem-Br-cQO" secondAttribute="leading" constant="82" id="bwM-LU-4Ip"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Профиль" image="person.crop.circle" catalog="system" selectedImage="person.crop.circle.fill" id="P5V-IG-mKg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z1f-W4-VWo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1485" y="1481"/>
+            <point key="canvasLocation" x="-1485.5999999999999" y="1480.7881773399015"/>
         </scene>
         <!--Категории-->
         <scene sceneID="bpC-D0-gqe">
             <objects>
-                <viewController id="3K9-9V-ZM2" customClass="CollectionViewController" customModule="Edutoria" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CollectionViewController" id="3K9-9V-ZM2" customClass="CollectionViewController" customModule="Edutoria" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XIS-8Y-TsN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -416,7 +393,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <segue destination="X75-SH-Emr" kind="show" id="0pr-0h-lM8"/>
+                                            <segue destination="X75-SH-Emr" kind="show" id="ST9-IN-KNl"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -438,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Xf-bp-LlX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="118" y="1481"/>
+            <point key="canvasLocation" x="-668" y="2170"/>
         </scene>
         <!--Courses List View Controller-->
         <scene sceneID="dja-lN-yBk">
@@ -448,41 +425,122 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpD-2b-9hd">
-                                <rect key="frame" x="149" y="357" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="XE4-bR-UQX">
+                                <rect key="frame" x="0.0" y="94" width="375" height="635"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="3nV-Lc-7Fv" customClass="CoursesListTableViewCell" customModule="Edutoria" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3nV-Lc-7Fv" id="dVM-Gh-shX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Rxp-5k-0bL" kind="show" id="nqV-nz-TRK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ALf-X5-P5h"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XE4-bR-UQX" firstAttribute="leading" secondItem="ALf-X5-P5h" secondAttribute="leading" id="Ia9-Vk-aZh"/>
+                            <constraint firstItem="ALf-X5-P5h" firstAttribute="trailing" secondItem="XE4-bR-UQX" secondAttribute="trailing" id="Wjg-nm-eHJ"/>
+                            <constraint firstItem="XE4-bR-UQX" firstAttribute="top" secondItem="ALf-X5-P5h" secondAttribute="top" id="Xrb-tJ-xHy"/>
+                            <constraint firstItem="ALf-X5-P5h" firstAttribute="bottom" secondItem="XE4-bR-UQX" secondAttribute="bottom" id="oA8-dP-vjy"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tpD-NG-Jmq"/>
+                    <connections>
+                        <outlet property="tableView" destination="XE4-bR-UQX" id="icM-Vu-ccJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Wl-bL-cJf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="1481"/>
+            <point key="canvasLocation" x="161" y="2169"/>
         </scene>
-        <!--Избранное-->
-        <scene sceneID="Lx8-SC-WIj">
+        <!--Lessons List View Controller-->
+        <scene sceneID="XAV-dN-bZV">
             <objects>
-                <viewController id="ADA-Xo-ecR" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Hed-gk-kQw">
+                <viewController storyboardIdentifier="LessonsListViewController" id="Rxp-5k-0bL" customClass="LessonsListViewController" customModule="Edutoria" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bn8-Jx-0w6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="hFg-PM-BP6"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5G6-ah-hF1">
+                                <rect key="frame" x="0.0" y="94" width="375" height="635"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zvR-EG-Inp" customClass="LessonsListTableViewCell" customModule="Edutoria" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zvR-EG-Inp" id="Ukl-3W-m2u">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JXc-2d-uZE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5G6-ah-hF1" firstAttribute="top" secondItem="JXc-2d-uZE" secondAttribute="top" id="9TC-Ag-Dcg"/>
+                            <constraint firstItem="JXc-2d-uZE" firstAttribute="bottom" secondItem="5G6-ah-hF1" secondAttribute="bottom" id="TYr-Ae-A9h"/>
+                            <constraint firstItem="JXc-2d-uZE" firstAttribute="trailing" secondItem="5G6-ah-hF1" secondAttribute="trailing" id="hBL-o8-33R"/>
+                            <constraint firstItem="5G6-ah-hF1" firstAttribute="leading" secondItem="JXc-2d-uZE" secondAttribute="leading" id="hcr-Yn-Haf"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Избранное" id="Sck-Ya-OjT">
-                        <imageReference key="image" image="bookmark.circle" catalog="system" symbolScale="large"/>
-                        <imageReference key="selectedImage" image="bookmark.circle.fill" catalog="system" symbolScale="medium"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="RCn-f2-R3q"/>
+                    <connections>
+                        <outlet property="tableView" destination="5G6-ah-hF1" id="rdB-eV-P0K"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lyF-Zq-Oqa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hmC-Vd-JXK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1922" y="1481"/>
+            <point key="canvasLocation" x="922" y="2169"/>
+        </scene>
+        <!--Настройки-->
+        <scene sceneID="Rvm-dz-6Qn">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="Cb1-5j-S9E" customClass="SettingsViewController" customModule="Edutoria" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Fu-Um-T4H">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тут могла бы быть ваша реклама " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKM-cw-Lwv">
+                                <rect key="frame" x="25.666666666666657" y="256" width="324" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="textColor" red="0.67450982329999998" green="0.2117646933" blue="0.33725491169999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvj-gl-b26">
+                                <rect key="frame" x="95" y="387" width="184" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.67450982329999998" green="0.2117646933" blue="0.33725491169999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Удалить аккаунт">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="DeleteAccountButtonClicked:" destination="Cb1-5j-S9E" eventType="touchUpInside" id="OBN-V2-0zY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lIe-X8-8T6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bKM-cw-Lwv" firstAttribute="top" secondItem="lIe-X8-8T6" secondAttribute="top" constant="206" id="lnP-fR-xIU"/>
+                            <constraint firstItem="bKM-cw-Lwv" firstAttribute="centerX" secondItem="4Fu-Um-T4H" secondAttribute="centerX" id="zfX-wv-dId"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Настройки" image="gearshape.circle" catalog="system" selectedImage="gearshape.circle.fill" id="ePS-oo-k8w"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cl4-3E-9T9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1863.2" y="1480.7881773399015"/>
         </scene>
         <!--Курсы-->
         <scene sceneID="GX2-cB-U3K">
@@ -506,12 +564,39 @@
             </objects>
             <point key="canvasLocation" x="-666.41221374045801" y="1480.9859154929579"/>
         </scene>
+        <!--Избранное-->
+        <scene sceneID="QIU-Ns-2ZC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7iw-Jb-GRc" customClass="FavouritesViewController" customModule="Edutoria" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Избранное" id="Sck-Ya-OjT">
+                        <imageReference key="image" image="bookmark.circle" catalog="system" symbolScale="large"/>
+                        <imageReference key="selectedImage" image="bookmark.circle.fill" catalog="system" symbolScale="medium"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mlu-V0-MO9">
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="X75-SH-Emr" kind="relationship" relationship="rootViewController" id="gBE-WL-3ep"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RID-UN-1yZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="160.80000000000001" y="1480.7881773399015"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="gBE-WL-3ep"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="book.circle" catalog="system" width="128" height="123"/>
         <image name="book.circle.fill" catalog="system" width="128" height="123"/>
         <image name="bookmark.circle" catalog="system" width="128" height="123"/>
         <image name="bookmark.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="gearshape.circle" catalog="system" width="128" height="123"/>
+        <image name="gearshape.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="opaqueSeparatorColor">

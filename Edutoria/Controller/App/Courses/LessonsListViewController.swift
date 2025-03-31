@@ -7,55 +7,69 @@
 
 import UIKit
 
-class CourseLessonsListViewController: UIViewController {
+class LessonsListViewController: UIViewController{
    
     @IBOutlet var tableView: UITableView!
-    
+    var courseId: String?
     var courseName: String?
-    var categoryName: String?
-    var courses: [(name: String, imageUrl: String)] = []
+    var lessons: [Lesson] = []
+    
     static func identifier() -> String {
-        return "CourseLessonsListViewController"
+        return "LessonsListViewController"
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = categoryName
+        title = courseName
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(CoursesListTableViewCell.nib(), forCellReuseIdentifier: CoursesListTableViewCell.identifier())
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        tableView.register(LessonsListTableViewCell.nib(), forCellReuseIdentifier: LessonsListTableViewCell.identifier())
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        
+        guard courseId != nil else { return }
+        FirestoreService.shared.fetchLessons(for: courseId!) { [weak self] lessons, error in
+            guard let self = self else { return }
+            if let error = error {
+                print("Ошибка загрузки категорий: \(error.localizedDescription)")
+                return
+            }
+            self.lessons = lessons ?? []
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
+        
     }
 
     
 }
 
 // MARK: - UITableViewDataSource
-extension CoursesListViewController: UITableViewDataSource {
+extension LessonsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courses.count
+        return lessons.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CoursesListTableViewCell.identifier(), for: indexPath) as! CoursesListTableViewCell
-        let course = courses[indexPath.row]
-        cell.configure(with: course)
+        let cell = tableView.dequeueReusableCell(withIdentifier: LessonsListTableViewCell.identifier(), for: indexPath) as! LessonsListTableViewCell
+        let lesson = lessons[indexPath.row]
+        cell.configure(with: lesson)
         return cell
     }
 }
 
 // MARK: - UITableViewDelegate
-extension CoursesListViewController: UITableViewDelegate {
+extension LessonsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let selectedCourse = courses[indexPath.row]
+        let selectedLesson = lessons[indexPath.row]
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let lessonsVC = storyboard.instantiateViewController(withIdentifier: CourseLessonsListViewController.identifier()) as? CourseLessonsListViewController {
-            lessonsVC.courseName = selectedCourse.name
-                        self.navigationController?.pushViewController(lessonsVC, animated: true)
-                    }
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let lessonsVC = storyboard.instantiateViewController(withIdentifier: CourseLessonsListViewController.identifier()) as? CourseLessonsListViewController {
+//            lessonsVC.courseName = selectedCourse.name
+//                        self.navigationController?.pushViewController(lessonsVC, animated: true)
+//                    }
     }
 }
 

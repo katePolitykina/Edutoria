@@ -11,7 +11,8 @@ class CollectionViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     var categories: [(name: String, imageUrl: String)] = [] // Храним категории
-
+    var favouriteCoursesId: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,15 +38,15 @@ class CollectionViewController: UIViewController {
                 return
             }
             self.categories = categories ?? []
-            print("Загружено категорий: \(categories?.count ?? 0)") // 🔥 Проверка количества
+            print("Загружено категорий: \(categories?.count ?? 0)")
 
                    if let categories = categories {
                        for category in categories {
-                           print("Категория: \(category.name), Image URL: \(category.imageUrl)") // 🔥 Проверка данных
+                           print("Категория: \(category.name), Image URL: \(category.imageUrl)")
                        }
                    }
                    
-            print("Категории загружены: \(categories ?? [])") // ✅ Отладка
+            print("Категории загружены: \(categories ?? [])")
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -55,16 +56,71 @@ class CollectionViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate
 extension CollectionViewController: UICollectionViewDelegate {
+ 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
         let selectedCategory = categories[indexPath.item]
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-               if let detailVC = storyboard.instantiateViewController(withIdentifier: "CoursesListViewController") as? CoursesListViewController {
-                  navigationController?.pushViewController(detailVC, animated: true)
-               }
+        FirestoreService.shared.fetchCourses(for: selectedCategory.name) { [weak self] courses, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print(" Ошибка загрузки курсов: \(error.localizedDescription)")
+                return
+            }
+            
+            // Запрашиваем избранные курсы
+            FirestoreService.shared.getFavouriteCourses { [weak self] (favouriteCourses, error) in
+                guard let self = self else { return }
+
+                if let favouriteCourses = favouriteCourses {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    
+                    // Создаем и настраиваем новый контроллер
+                    if let coursesVC = storyboard.instantiateViewController(withIdentifier: "CoursesListViewController") as? CoursesListViewController {
+                        coursesVC.courses = courses ?? [] // Передаем курсы категории
+                        coursesVC.favouriteCourses = favouriteCourses // Передаем избранные курсы
+                        coursesVC.categoryName = selectedCategory.name
+                        self.navigationController?.pushViewController(coursesVC, animated: true)
+                    }
+                } else {
+                    // Обработка ошибки при загрузке избранных курсов
+                    print("Error loading favourite courses: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+        }
+
     }
+   
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//           let selectedCategory = categories[indexPath.item]
+//           
+//           // Загружаем курсы для выбранной категории
+//           FirestoreService.shared.fetchCourses(for: selectedCategory.name) { [weak self] courses, error in
+//               guard let self = self else { return }
+//               
+//               if let error = error {
+//                   print("Ошибка загрузки курсов: \(error.localizedDescription)")
+//                   return
+//               }
+//               
+//               // Создаем и настраиваем новый контроллер
+//               let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//               
+//               if let coursesVC = storyboard.instantiateViewController(withIdentifier: "CoursesListViewController") as? CoursesListViewController {
+//                   coursesVC.courses = courses ?? [] // Передаем курсы категории
+//                   coursesVC.categoryName = selectedCategory.name
+//                   
+//    
+//                   
+//                   self.navigationController?.pushViewController(coursesVC, animated: true)
+//               }
+//           }
+//   }
+    
 }
+
+
+
 
 // MARK: - UICollectionViewDataSource
 extension CollectionViewController: UICollectionViewDataSource {
