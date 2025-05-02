@@ -14,6 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         let isLogin = userDefault.object(forKey: "isLogin") as? Bool ?? false
         if (AuthenticationService.shared.isUserLoggedIn()){
             startApp()

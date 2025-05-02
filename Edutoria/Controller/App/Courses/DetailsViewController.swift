@@ -1,30 +1,26 @@
-//
-//  ObjectDetailViewController.swift
-//  Edutoria
-//
-//  Created by Ekaterina Politykina on 31.03.25.
-//
-
-
 import UIKit
+import SDWebImage
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UIViewController, UICollectionViewDelegate {
     
-    var object: Object?
+    var lesson = LessonDetails.empty()
 
-    // Создаем UICollectionView для слайдера изображений
+    var scrollView: UIScrollView!
     var collectionView: UICollectionView!
-    
-    // Создаем UILabel для отображения текста
     var descriptionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Устанавливаем фон экрана
         view.backgroundColor = .white
         
-        // Настроим UICollectionView для слайдера изображений
+        // Скролл для всего контента
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
+        view.addSubview(scrollView)
+        
+        // Коллекция изображений (горизонтальный слайдер)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
@@ -36,42 +32,47 @@ class DetailsViewController: UIViewController {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.isPagingEnabled = true
         collectionView.backgroundColor = .clear
-        view.addSubview(collectionView)
+        scrollView.addSubview(collectionView)
         
-        // Настроим UILabel для текста
+        // Текстовое описание
         descriptionLabel = UILabel()
-        descriptionLabel.frame = CGRect(x: 16, y: collectionView.frame.maxY + 16, width: view.frame.width - 32, height: 100)
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textColor = .black
         descriptionLabel.textAlignment = .center
-        descriptionLabel.text = object?.description
-        view.addSubview(descriptionLabel)
+        descriptionLabel.text = lesson.description
+        descriptionLabel.frame = CGRect(x: 16, y: collectionView.frame.maxY + 16, width: view.frame.width - 32, height: 100)
+        scrollView.addSubview(descriptionLabel)
         
-        // Добавим отступы, если описание длинное
+        // Автоматическое подстраивание размера текста
         descriptionLabel.sizeToFit()
+
+        // Обновляем contentSize для scrollView
+        scrollView.contentSize = CGSize(width: view.frame.width, height: collectionView.frame.height + descriptionLabel.frame.height + 32)
     }
 }
 
 // MARK: - UICollectionViewDataSource
 extension DetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return object?.images.count ?? 0
+        return lesson.images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
         
-        // Создаем UIImageView для отображения изображения
-        let imageView = UIImageView(image: object?.images[indexPath.item])
-        imageView.frame = cell.contentView.bounds
-        imageView.contentMode = .scaleAspectFill
-        cell.contentView.addSubview(imageView)
+        // Удаляем старые subviews, чтобы избежать дублирования
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
         
+        let imageView = UIImageView(frame: cell.contentView.bounds)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        let urlString = lesson.images[indexPath.item]
+        if let url = URL(string: urlString) {
+            imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+        }
+        
+        cell.contentView.addSubview(imageView)
         return cell
     }
-}
-
-// MARK: - UICollectionViewDelegate
-extension DetailsViewController: UICollectionViewDelegate {
-    // Здесь можно добавить обработку выбора изображения, если нужно
 }

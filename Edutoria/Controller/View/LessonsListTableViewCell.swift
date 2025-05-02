@@ -17,11 +17,15 @@ class LessonsListTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(with lesson :Lesson) {
+    func configure(with lesson :Lesson, image: String) {
         titleLabel.text = lesson.name
         contentLabel.numberOfLines = 0
         contentLabel.lineBreakMode = .byWordWrapping
         contentLabel.text = lesson.topics.joined(separator: "\n")
+        let imageUrl = URL(string: image)
+        lessonIconImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "lesson"))
+        lessonIconImageView.layer.cornerRadius = lessonIconImageView.frame.size.width / 2 // Половина ширины — для круга
+        lessonIconImageView.clipsToBounds = true
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

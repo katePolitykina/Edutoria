@@ -83,5 +83,54 @@ class AuthenticationService {
     func getCurrentUserID() -> String? {
         return Auth.auth().currentUser?.uid
     }
+    func deleteUser(password: String, completion: @escaping (Result<Void, AuthenticationError>) -> Void) {
+        guard let currentUser = Auth.auth().currentUser else {
+            completion(.failure(.genericError("Пользователь не найден.")))
+            return
+        }
+        guard let email = currentUser.email else {
+            completion(.failure(.genericError("Email пользователя не найден.")))
+            return
+        }
+        // Создаем учетные данные с email и паролем для повторной аутентификации
+        let credential = EmailAuthProvider.credential(withEmail: currentUser.email!, password: password)
+        print(currentUser.email!)
+        // Повторная аутентификация пользователя для проверки подлинности перед удалением
 
+        currentUser.reauthenticate(with: credential) { (authResult, error) in
+            if let error = error {
+                // Обработка ошибок
+                let errorMessage: AuthenticationError
+                if let authError = error as NSError? {
+                    switch AuthErrorCode(rawValue: authError.code) {
+                    case .expiredActionCode, .sessionExpired, .userTokenExpired:
+                        errorMessage = .genericError("Срок действия токенов истек. Пожалуйста, авторизуйтесь заново.")
+                    default:
+                        errorMessage = .genericError("Ошибка при повторной аутентификации: \(error.localizedDescription)")
+                    }
+                } else {
+                    errorMessage = .genericError("Не удалось выполнить повторную аутентификацию.")
+                }
+                completion(.failure(errorMessage))
+                return
+            }
+            // Удаление пользователя из Firebase Auth
+            currentUser.delete { error in
+                if let error = error {
+                    let errorMessage: AuthenticationError
+                    errorMessage = .genericError("Не удалось удалить аккаунт. Попробуйте снова.")
+                    completion(.failure(errorMessage))
+                    return
+                }
+                
+                // Удаление данных пользователя из Firestore
+                Firestore.firestore().collection("users").document(currentUser.uid).delete { error in
+                    if let error = error {
+                        completion(.failure(.genericError("Ошибка при удалении данных пользователя из Firestore.")))
+                        return
+                    }
+                    completion(.success(())) // Успешное удаление аккаунта
+                }
+            }
+        }}
 }

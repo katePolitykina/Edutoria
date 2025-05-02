@@ -88,7 +88,7 @@ class FirestoreService {
                     let courses = documents.compactMap { doc -> Course? in
                         let id = doc.documentID
                         let name = doc["name"] as? String ?? "Без названия"
-                        let imageUrl = doc["imageUrl"] as? String ?? ""
+                        let imageUrl = doc["image"] as? String ?? ""
                         let course = Course(id: id, name: name, imageURL: imageUrl)
                         return course
                     }
@@ -149,6 +149,29 @@ class FirestoreService {
        }
        }
     
+    func getLesson(lessonId: String, courseId: String, completion: @escaping (LessonDetails?, Error?) -> Void) {
+        // Шаг 1: Найти документ урока по ID в подколлекции "Lessons"
+        db.collection(CoursesCollectionName).document(courseId).collection("Lessons").document(lessonId).getDocument { (document, error) in
+            if let error = error {
+                print("Ошибка при получении урока: \(error.localizedDescription)")
+                completion(nil, error)
+                return
+            }
+            
+            guard let document = document, document.exists, let data = document.data() else {
+                print("Урок с ID \(lessonId) не найден")
+                completion(nil, nil)
+                return
+            }
+            
+            // Шаг 2: Создаем объект LessonDetails из полученных данных
+            let lessonDetails = LessonDetails(id: lessonId, data: data)
+            
+            print("Урок загружен: \(lessonDetails)")
+            completion(lessonDetails, nil)
+        }
+    }
+
     
     func getFavouriteCourses(completion: @escaping ([Course]?, Error?) -> Void) {
         print("Метод getFavouriteCourses вызван") // Логируем начало метода
@@ -192,7 +215,7 @@ class FirestoreService {
                               let courseData = courseDocument.data() {
                         let id = courseDocument.documentID
                         let name = courseData["name"] as? String ?? "Неизвестный курс"
-                        let imageURL = courseData["imageURL"] as? String ?? ""
+                        let imageURL = courseData["image"] as? String ?? ""
                         
                         let course = Course(id: id, name: name, imageURL: imageURL)
                         courses.append(course)

@@ -10,11 +10,11 @@ class CoursesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = categoryName
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CoursesListTableViewCell.nib(), forCellReuseIdentifier: CoursesListTableViewCell.identifier())
-            
+      
         self.tableView.reloadData()
         
     }
@@ -87,6 +87,7 @@ extension CoursesListViewController: UITableViewDelegate {
         if let lessonsVC = storyboard.instantiateViewController(withIdentifier: LessonsListViewController.identifier()) as? LessonsListViewController {
             lessonsVC.courseName = selectedCourse.name
             lessonsVC.courseId = selectedCourse.id
+            lessonsVC.image = selectedCourse.imageURL
                         self.navigationController?.pushViewController(lessonsVC, animated: true)
                     }
     }

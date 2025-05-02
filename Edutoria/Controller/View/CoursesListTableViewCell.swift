@@ -30,6 +30,8 @@ class CoursesListTableViewCell: UITableViewCell {
         courseNameLabel.text = course.name
         courseImageView.sd_setImage(with: URL(string: course.imageURL), placeholderImage: UIImage(named: "placeholder"))
         favouriteButton.isSelected = isFavourite
+        courseImageView.layer.cornerRadius = courseImageView.frame.size.width / 2
+        courseImageView.clipsToBounds = true
     }
 
     static func nib() -> UINib {

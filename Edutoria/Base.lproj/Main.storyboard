@@ -469,17 +469,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5G6-ah-hF1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5G6-ah-hF1">
                                 <rect key="frame" x="0.0" y="94" width="375" height="635"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="separatorColor" red="0.67450982329999998" green="0.2117646933" blue="0.33725491169999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="separatorInset" minX="50" minY="0.0" maxX="50" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zvR-EG-Inp" customClass="LessonsListTableViewCell" customModule="Edutoria" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="16" y="55.333332061767578" width="343" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zvR-EG-Inp" id="Ukl-3W-m2u">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="DXi-ks-gfY" kind="show" id="e9o-oG-onZ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -502,6 +506,22 @@
             </objects>
             <point key="canvasLocation" x="922" y="2169"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="xII-Oo-mWk">
+            <objects>
+                <viewController storyboardIdentifier="DetailsViewController" id="DXi-ks-gfY" customClass="DetailViewController" customModule="Edutoria" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MnC-vr-FPA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="GGf-eP-DHO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="W8p-UG-Y8A"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pa8-np-lhu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1785" y="2169"/>
+        </scene>
         <!--Настройки-->
         <scene sceneID="Rvm-dz-6Qn">
             <objects>
@@ -516,13 +536,15 @@
                                 <color key="textColor" red="0.67450982329999998" green="0.2117646933" blue="0.33725491169999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvj-gl-b26">
-                                <rect key="frame" x="95" y="387" width="184" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvj-gl-b26">
+                                <rect key="frame" x="95.666666666666686" y="387" width="184" height="38"/>
+                                <color key="backgroundColor" red="0.67450982329999998" green="0.2117646933" blue="0.33725491169999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.67450982329999998" green="0.2117646933" blue="0.33725491169999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Удалить аккаунт">
                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" red="0.67450982329999998" green="0.2117646933" blue="0.33725491169999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="DeleteAccountButtonClicked:" destination="Cb1-5j-S9E" eventType="touchUpInside" id="OBN-V2-0zY"/>
@@ -532,6 +554,8 @@
                         <viewLayoutGuide key="safeArea" id="lIe-X8-8T6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bvj-gl-b26" firstAttribute="centerY" secondItem="4Fu-Um-T4H" secondAttribute="centerY" id="2o9-6h-33l"/>
+                            <constraint firstItem="bvj-gl-b26" firstAttribute="centerX" secondItem="4Fu-Um-T4H" secondAttribute="centerX" id="ArP-ll-2qa"/>
                             <constraint firstItem="bKM-cw-Lwv" firstAttribute="top" secondItem="lIe-X8-8T6" secondAttribute="top" constant="206" id="lnP-fR-xIU"/>
                             <constraint firstItem="bKM-cw-Lwv" firstAttribute="centerX" secondItem="4Fu-Um-T4H" secondAttribute="centerX" id="zfX-wv-dId"/>
                         </constraints>
@@ -588,7 +612,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gBE-WL-3ep"/>
+        <segue reference="ST9-IN-KNl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="book.circle" catalog="system" width="128" height="123"/>
